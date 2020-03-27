@@ -1,0 +1,30 @@
+{
+  "name": "yaml-2-env",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel src/public/index.html",
+    "build": "parcel build src/public/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malcodeman/yaml-2-env.git"
+  },
+  "author": "malcodeman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/malcodeman/yaml-2-env/issues"
+  },
+  "homepage": "https://github.com/malcodeman/yaml-2-env#readme",
+  "dependencies": {
+    "js-yaml": "^3.13.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.19.0",
+    "parcel": "^2.0.0-alpha.3.2"
+  }
+}
