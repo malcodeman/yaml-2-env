@@ -8,6 +8,7 @@ import { FormControl } from "./components/form-control";
 import { ParagraphSmall } from "./components/typography";
 import theme from "./components/themes/darkTheme";
 import GlobalStyle from "./GlobalStyle";
+import example from "./example.yaml";
 
 const Wrapper = styled.div`
   display: flex;
@@ -45,8 +46,8 @@ const StyledLink = styled.a`
 `;
 
 function App() {
-  const [yaml, setYaml] = React.useState("");
-  const [env, setEnv] = React.useState("");
+  const [yaml, setYaml] = React.useState(JSON.stringify(example));
+  const [env, setEnv] = React.useState(parseYaml(example));
   const [error, setError] = React.useState("");
 
   function decodeBase64(encoded) {
@@ -68,7 +69,7 @@ function App() {
   }
 
   function parseYaml(json) {
-    const configMap = json[0];
+    const configMap = Array.isArray(json) ? json[0] : json;
     const secret = json[1];
     const configMapData = configMap.data;
     const configMapDataEnv = jsonToEnv(configMapData);
