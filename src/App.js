@@ -5,17 +5,18 @@ import { ThemeProvider } from "styled-components";
 
 import { Textarea } from "./components/textarea";
 import { FormControl } from "./components/form-control";
-
+import { ParagraphSmall } from "./components/typography";
 import theme from "./components/themes/darkTheme";
 import GlobalStyle from "./GlobalStyle";
 
 const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 1rem;
   min-height: 100vh;
   background-color: ${props => props.theme.colors.backgroundPrimary};
   @media (min-width: 576px) {
-    display: flex;
-    align-items: center;
     justify-content: center;
   }
 `;
@@ -23,6 +24,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
   width: 100%;
   max-width: 992px;
+  margin-bottom: 2rem;
   @media (min-width: 576px) {
     display: grid;
     gap: 1rem;
@@ -35,6 +37,11 @@ const StyledTextarea = styled(Textarea)`
   @media (min-width: 576px) {
     min-height: 256px;
   }
+`;
+
+const StyledLink = styled.a`
+  color: ${props => props.theme.colors.accent};
+  ${props => props.theme.typography.ParagraphSmall};
 `;
 
 function App() {
@@ -112,6 +119,29 @@ function App() {
             </FormControl>
           </div>
         </Container>
+        <footer>
+          <ParagraphSmall>
+            Made by{" "}
+            <StyledLink
+              href="https://github.com/malcodeman"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              malcodeman{" "}
+              <span role="img" aria-label="bat">
+                🦇
+              </span>
+            </StyledLink>{" "}
+            -{" "}
+            <StyledLink
+              href="https://github.com/malcodeman/yaml-2-env"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              repo
+            </StyledLink>
+          </ParagraphSmall>
+        </footer>
       </Wrapper>
       <GlobalStyle />
     </ThemeProvider>

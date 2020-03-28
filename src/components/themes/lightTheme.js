@@ -6,7 +6,7 @@ import animations from "./animations";
 const theme = {
   colors: {
     primary: "#000000",
-    accent: "#276EF1",
+    accent: "#6441A5",
     background: "#FFFFFF",
     backgroundPrimary: "#FFFFFF",
     backgroundSecondary: "#F6F6F6",
