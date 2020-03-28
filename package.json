@@ -2,10 +2,10 @@
   "name": "yaml-2-env",
   "description": "",
   "version": "1.0.0",
-  "main": "index.html",
   "scripts": {
     "start": "parcel src/public/index.html",
-    "build": "parcel build src/public/index.html"
+    "build": "parcel build src/public/index.html",
+    "deploy": "yarn build && mv dist/index.html dist/200.html && surge dist yaml2env.surge.sh"
   },
   "repository": {
     "type": "git",
