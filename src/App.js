@@ -6,9 +6,38 @@ function App() {
   const [env, setEnv] = React.useState("");
   const [error, setError] = React.useState("");
 
-  function jsonToEnv(json) {
-    // TODO
-    return JSON.stringify(json);
+  function decodeBase64(encoded) {
+    return window.atob(encoded);
+  }
+
+  function jsonToEnv(json, fun) {
+    let env = "";
+
+    for (const [key, value] of Object.entries(json)) {
+      if (typeof fun === "function") {
+        env += `${key}=${fun(value)}\n`;
+      } else {
+        env += `${key}=${value}\n`;
+      }
+    }
+
+    return env;
+  }
+
+  function parseYaml(json) {
+    const configMap = json[0];
+    const secret = json[1];
+    const configMapData = configMap.data;
+    const configMapDataEnv = jsonToEnv(configMapData);
+
+    if (secret) {
+      const secretData = secret.data;
+      const secretDataEnv = jsonToEnv(secretData, decodeBase64);
+
+      return `${configMapDataEnv}\n${secretDataEnv}`;
+    }
+
+    return configMapDataEnv;
   }
 
   function handleOnChange(e) {
@@ -16,8 +45,8 @@ function App() {
 
     setYaml(value);
     try {
-      const json = jsyaml.load(value);
-      const env = jsonToEnv(json);
+      const json = jsyaml.safeLoadAll(value);
+      const env = parseYaml(json);
 
       setEnv(env);
     } catch (error) {
