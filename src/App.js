@@ -96,7 +96,6 @@ function App() {
       setEnv(env);
     } catch (error) {
       setError(error);
-      setYaml(value);
       setEnv("");
     }
   }
