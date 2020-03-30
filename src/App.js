@@ -54,18 +54,18 @@ function App() {
     return window.atob(encoded);
   }
 
-  function jsonToEnv(json, fun) {
-    let env = "";
+  function jsonToEnv(json, fun, env = "", length = 0) {
+    const entries = Object.entries(json);
 
-    for (const [key, value] of Object.entries(json)) {
-      if (typeof fun === "function") {
-        env += `${key}=${fun(value)}\n`;
-      } else {
-        env += `${key}=${value}\n`;
-      }
+    if (length === entries.length) {
+      return env;
+    } else {
+      const [key, value] = entries[length];
+
+      return typeof fun === "function"
+        ? jsonToEnv(json, fun, (env += `${key}=${fun(value)}\n`), length + 1)
+        : jsonToEnv(json, fun, (env += `${key}=${value}\n`), length + 1);
     }
-
-    return env;
   }
 
   function parseYaml(json) {
