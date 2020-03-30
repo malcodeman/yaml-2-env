@@ -6,9 +6,10 @@ import { ThemeProvider } from "styled-components";
 import { Textarea } from "./components/textarea";
 import { FormControl } from "./components/form-control";
 import { ParagraphSmall } from "./components/typography";
-import theme from "./components/themes/darkTheme";
+import { light, dark } from "./components/themes";
 import GlobalStyle from "./GlobalStyle";
 import example from "./example.yaml";
+import { usePreferredTheme } from "./hooks/usePreferredTheme";
 
 const Wrapper = styled.div`
   display: flex;
@@ -49,6 +50,8 @@ function App() {
   const [yaml, setYaml] = React.useState(JSON.stringify(example));
   const [env, setEnv] = React.useState(parseYaml(example));
   const [error, setError] = React.useState("");
+  const darkTheme = usePreferredTheme();
+  const theme = darkTheme ? dark : light;
 
   function decodeBase64(encoded) {
     return window.atob(encoded);
