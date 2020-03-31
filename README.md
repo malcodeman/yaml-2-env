@@ -11,7 +11,7 @@ Simple YAML to .env convertor. Designed for Kubernetes ConfigMaps.
 ## Getting started
 
 ```
-git clone https://github.com/malcodeman/yaml-2-env yaml-2-env
+git clone https://github.com/malcodeman/yaml-2-env
 cd yaml-2-env
 yarn install && yarn start
 ```
