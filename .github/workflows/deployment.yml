@@ -1,0 +1,27 @@
+name: Deployment
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: Install packages
+        run: npm install
+
+      - name: Build the app
+        run: npm run build
+
+      - name: Rename index file
+        run: mv dist/index.html dist/200.html
+
+      - name: Deploy to surge
+        run: surge ./dist yaml2env.surge.sh --token ${{secrets.SURGE_TOKEN}}
