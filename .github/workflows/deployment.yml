@@ -20,8 +20,8 @@ jobs:
       - name: Build the app
         run: npm run build
 
-      - name: Rename index file
-        run: mv dist/index.html dist/200.html
+      - name: Install Surge
+        run: npm install -g surge
 
       - name: Deploy to surge
-        run: surge ./dist yaml2env.surge.sh --token ${{secrets.SURGE_TOKEN}}
+        run: surge ./out yaml2env.surge.sh --token ${{secrets.SURGE_TOKEN}}
