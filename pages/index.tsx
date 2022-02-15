@@ -1,5 +1,12 @@
 import React from "react";
-import { Center, Container, SimpleGrid, Textarea } from "@mantine/core";
+import {
+  Anchor,
+  Center,
+  Container,
+  SimpleGrid,
+  Text,
+  Textarea,
+} from "@mantine/core";
 import Head from "next/head";
 import { toString } from "ramda";
 import type { NextPage } from "next";
@@ -35,16 +42,44 @@ const Home: NextPage = () => {
       </Head>
       <Center sx={{ minHeight: "100vh" }}>
         <Container size={"md"} sx={{ width: "100%" }}>
-          <SimpleGrid sx={{ gridTemplateColumns: "1fr 1fr" }} spacing={"xl"}>
+          <SimpleGrid
+            sx={() => ({
+              gridTemplateColumns: "1fr",
+              "@media (min-width: 576px)": {
+                gridTemplateColumns: "1fr 1fr",
+              },
+            })}
+            spacing={"xl"}
+            mb={"xl"}
+          >
             <Textarea
               label="YAML"
+              radius={"md"}
+              variant={"default"}
               minRows={6}
               error={error}
               value={yaml}
               onChange={handleOnChange}
             />
-            <Textarea label=".env" minRows={6} value={env} readOnly />
+            <Textarea
+              label=".env"
+              radius={"md"}
+              variant={"default"}
+              minRows={6}
+              value={env}
+              readOnly
+            />
           </SimpleGrid>
+          <Text align={"center"}>
+            Made by{" "}
+            <Anchor href={constants.GITHUB_PROFILE} target="_blank">
+              malcodeman
+            </Anchor>{" "}
+            -{" "}
+            <Anchor href={constants.GITHUB_REPO} target="_blank">
+              repo
+            </Anchor>
+          </Text>
         </Container>
       </Center>
     </div>

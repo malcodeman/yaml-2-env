@@ -5,6 +5,8 @@ metadata:
 data:
   PASSWORD: "hunter2"
 `;
-const EXPORTS = { CONFIG_MAP };
+const GITHUB_PROFILE = "https://github.com/malcodeman";
+const GITHUB_REPO = "https://github.com/malcodeman/yaml-2-env";
+const EXPORTS = { CONFIG_MAP, GITHUB_PROFILE, GITHUB_REPO };
 
 export default EXPORTS;
