@@ -56,7 +56,7 @@ const Home: NextPage = () => {
               label="YAML"
               radius={"md"}
               variant={"default"}
-              minRows={6}
+              minRows={10}
               error={error}
               value={yaml}
               onChange={handleOnChange}
@@ -65,7 +65,7 @@ const Home: NextPage = () => {
               label=".env"
               radius={"md"}
               variant={"default"}
-              minRows={6}
+              minRows={10}
               value={env}
               readOnly
             />
