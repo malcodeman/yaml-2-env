@@ -1,5 +1,4 @@
-const CONFIG_MAP = `
-apiVersion: v1
+const CONFIG_MAP = `apiVersion: v1
 kind: ConfigMap
 metadata:
   name: api
