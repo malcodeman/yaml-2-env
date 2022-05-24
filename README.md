@@ -5,14 +5,18 @@
 
 Simple YAML to .env convertor. Designed for Kubernetes [ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap).
 
-![Screenshot](readme/screenshot.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="readme/screenshot-dark.png">
+  <img src="readme/screenshot-light.png">
+</picture>
 
 ## Getting started
 
 ```
 git clone https://github.com/malcodeman/yaml-2-env
 cd yaml-2-env
-npm install && npm run dev
+npm install
+npm run dev
 ```
 
 ## License
