@@ -5,10 +5,7 @@
 
 Simple YAML to .env convertor. Designed for Kubernetes [ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap).
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="readme/screenshot-dark.png">
-  <img src="readme/screenshot-light.png">
-</picture>
+![Screenshot](readme/screenshot-dark.png)
 
 ## Getting started
 
