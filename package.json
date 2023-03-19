@@ -7,9 +7,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@mantine/core": "^3.6.7",
-    "@mantine/hooks": "^3.6.7",
-    "@mantine/next": "^3.6.7",
+    "@mantine/core": "^6.0.2",
+    "@mantine/hooks": "^6.0.2",
+    "@mantine/next": "^6.0.2",
     "js-yaml": "^4.1.0",
     "next": "12.0.10",
     "ramda": "^0.28.0",
