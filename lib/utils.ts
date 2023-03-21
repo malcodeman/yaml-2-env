@@ -1,5 +1,4 @@
-import jsyaml from "js-yaml";
-import { equals, length, inc, toString, prop, or, and } from "ramda";
+import { equals, length, inc, toString, toPairs } from "ramda";
 
 function decodeBase64(encoded: string) {
   return Buffer.from(encoded, "base64");
@@ -24,17 +23,26 @@ function jsonToEnv(
   }
 }
 
-function yamlToEnv(value: string) {
-  const json = jsyaml.loadAll(value);
-  const configMap = Array.isArray(json) ? json[0] : json;
-  const isSecret = Boolean(
-    and(equals(configMap.kind, "Secret"), prop("data", configMap))
-  );
-  const configMapData = or(
-    prop("data", configMap),
-    prop("stringData", configMap)
-  );
-  return jsonToEnv(Object.entries(configMapData), isSecret);
+function yamlToEnv(json: unknown[], env = "", index = 0): string {
+  if (equals(index, length(json))) {
+    return env;
+  }
+  const configMap = json[index];
+  if (
+    configMap &&
+    typeof configMap === "object" &&
+    "kind" in configMap &&
+    "data" in configMap &&
+    configMap.data &&
+    typeof configMap.data === "object"
+  ) {
+    const isSecret = equals(configMap.kind, "Secret");
+    const pairs = toPairs(configMap.data);
+    const newLine = equals(index, 0) ? env : `${env}\n`;
+    const newEnv = `${newLine}${jsonToEnv(pairs, isSecret)}`;
+    return yamlToEnv(json, newEnv, inc(index));
+  }
+  return env;
 }
 
 const EXPORTS = {
