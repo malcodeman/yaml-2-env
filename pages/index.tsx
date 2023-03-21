@@ -9,15 +9,16 @@ import {
 } from "@mantine/core";
 import Head from "next/head";
 import { toString } from "ramda";
+import jsyaml from "js-yaml";
 import type { NextPage } from "next";
 
 import constants from "../lib/constants";
 import utils from "../lib/utils";
 
-const envInitial = utils.yamlToEnv(constants.CONFIG_MAP);
+const envInitial = utils.yamlToEnv([constants.CONFIG_MAP]);
 
 const Home: NextPage = () => {
-  const [yaml, setYaml] = React.useState(constants.CONFIG_MAP);
+  const [yaml, setYaml] = React.useState(JSON.stringify(constants.CONFIG_MAP));
   const [env, setEnv] = React.useState(envInitial);
   const [error, setError] = React.useState("");
 
@@ -26,7 +27,7 @@ const Home: NextPage = () => {
     setYaml(value);
     try {
       setError("");
-      setEnv(utils.yamlToEnv(value));
+      setEnv(utils.yamlToEnv(jsyaml.loadAll(value)));
     } catch (error) {
       setError(toString(error));
       setEnv("");
