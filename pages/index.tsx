@@ -6,10 +6,14 @@ import {
   SimpleGrid,
   Text,
   Textarea,
+  Flex,
+  Tooltip,
 } from "@mantine/core";
 import Head from "next/head";
 import { toString } from "ramda";
 import jsyaml from "js-yaml";
+import { useClipboard } from "@mantine/hooks";
+import { FiCopy, FiCheck } from "react-icons/fi";
 import type { NextPage } from "next";
 
 import constants from "../lib/constants";
@@ -21,6 +25,7 @@ const Home: NextPage = () => {
   const [yaml, setYaml] = React.useState(JSON.stringify(constants.CONFIG_MAP));
   const [env, setEnv] = React.useState(envInitial);
   const [error, setError] = React.useState("");
+  const clipboard = useClipboard({ timeout: 2000 });
 
   function handleOnChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
     const value = e.currentTarget.value;
@@ -62,14 +67,38 @@ const Home: NextPage = () => {
               value={yaml}
               onChange={handleOnChange}
             />
-            <Textarea
-              label=".env"
-              radius={"md"}
-              variant={"default"}
-              minRows={10}
-              value={env}
-              readOnly
-            />
+            <Tooltip
+              withArrow
+              position="top-end"
+              bg="dark.6"
+              color="dark.0"
+              opened
+              label={
+                clipboard.copied ? (
+                  <Flex align="center">
+                    <FiCheck
+                      color="#51cf66"
+                      style={{ marginRight: "0.625rem" }}
+                    />
+                    Copied to clipboard
+                  </Flex>
+                ) : (
+                  <>
+                    <FiCopy /> Click to copy
+                  </>
+                )
+              }
+            >
+              <Textarea
+                label=".env"
+                radius={"md"}
+                variant={"default"}
+                minRows={10}
+                value={env}
+                readOnly
+                onClick={() => clipboard.copy(env)}
+              />
+            </Tooltip>
           </SimpleGrid>
           <Text align={"center"}>
             Made by{" "}
