@@ -5,7 +5,7 @@
 
 Simple YAML to .env convertor. Designed for Kubernetes [ConfigMaps](https://kubernetes.io/docs/concepts/configuration/configmap).
 
-![Screenshot](readme/screenshot-dark.png)
+![Screenshot](readme/screenshot.png)
 
 ## Getting started
 
